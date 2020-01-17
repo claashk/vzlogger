@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <cmath>
+#include <fcntl.h>
+#include <stdio.h>
 
 #include "gtest/gtest.h"
 #include <Options.hpp>
@@ -141,7 +143,7 @@ TEST(MeterSML, EMH_basic) {
 	// check obis data:
 	ReadingIdentifier *p = rds[0].identifier().get();
 	double value = rds[0].value();
-  EXPECT_LE(fabs(14796777.1 - value), 0.1);
+	EXPECT_LE(fabs(14796777.1 - value), 0.1);
 	ObisIdentifier *o = dynamic_cast<ObisIdentifier *>(p);
 	ASSERT_NE((ObisIdentifier *)0, o);
 	EXPECT_TRUE(Obis(1, 0, 1, 8, 1, 255) == (o->obis()));
