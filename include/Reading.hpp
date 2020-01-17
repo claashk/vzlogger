@@ -38,6 +38,7 @@
 
 #define MAX_IDENTIFIER_LEN 255
 
+
 /* Identifiers */
 class ReadingIdentifier {
   public:
@@ -82,6 +83,7 @@ class ObisIdentifier : public ReadingIdentifier {
 		oss << "ObisIdentifier:" << _obis.toString();
 		return oss.str();
 	};
+
 
 	const Obis &obis() const { return _obis; }
 
