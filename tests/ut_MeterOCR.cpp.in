@@ -16,6 +16,10 @@ class MeterOCR_Test {
 	static void test_roundBasedOnSmallerDigits();
 };
 
+static inline std::string pathTo(const char* file) {
+  return std::string("@CMAKE_SOURCE_DIR@") + file;
+}
+
 TEST(MeterOCR, basic2_needle_autofix) {
 	std::list<Option> options;
 	options.emplace_back("file", ocrTestImage("img2.png"));
