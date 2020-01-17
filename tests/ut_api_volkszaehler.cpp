@@ -6,6 +6,7 @@
 #include <api/Volkszaehler.hpp>
 // #include <api/CurlResponse.hpp>
 
+#include <test_config.hpp>
 #include "gtest/gtest.h"
 #include <test_config.hpp>
 
