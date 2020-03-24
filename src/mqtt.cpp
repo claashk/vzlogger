@@ -16,8 +16,7 @@ volatile bool endMqttClientThread = false;
 
 // class impl.
 MqttClient::MqttClient(struct json_object *option) : _enabled(false) {
-
-	print(log_finest, "MqttClient::MqttClient called", "mqtt");
+    print(log_finest, "MqttClient::MqttClient called", "mqtt");
 	if (option) {
 		assert(json_object_get_type(option) == json_type_object);
 		json_object_object_foreach(option, key, local_value) {
@@ -61,7 +60,7 @@ MqttClient::MqttClient(struct json_object *option) : _enabled(false) {
 				}
 			} else if (strcmp(key, "timestamp") == 0 && local_type == json_type_boolean) {
 				_timestamp = json_object_get_boolean(local_value);
-			} else if (strcmp(key, "id") == 0 && local_type == json_type_string) {
+            } else if (strcmp(key, "id") == 0 && local_type == json_type_string) {
 				_id = json_object_get_string(local_value);
 			} else {
 				print(log_alert, "Ignoring invalid field or type: %s=%s", NULL, key,
