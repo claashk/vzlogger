@@ -106,4 +106,3 @@ IF(GCOV_PATH AND LCOV_PATH AND GENHTML_PATH)
     )
 
 ENDIF(GCOV_PATH AND LCOV_PATH AND GENHTML_PATH)
-configure_file(../etc/vzlogger.conf etc/vzlogger.conf COPYONLY)
