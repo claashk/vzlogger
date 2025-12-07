@@ -40,5 +40,6 @@ debian/config.log
 CMakeFiles/
 CMakeCache.txt
 
+# QtCreator config files
 .qtcreator/
 
