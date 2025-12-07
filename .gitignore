@@ -39,3 +39,6 @@ debian/config.log
 # CMake temp files
 CMakeFiles/
 CMakeCache.txt
+
+.qtcreator/
+
