@@ -1,2 +1,0 @@
-etc/vzlogger.conf etc
-etc/logrotate.d/vzlogger etc/logrotate.d
