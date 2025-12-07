@@ -1,10 +1,6 @@
 #include <cmath>
 #include <fcntl.h>
 #include <stdio.h>
-#include <fcntl.h>
-#include <cmath>
-#include <fcntl.h>
-#include <stdio.h>
 
 #include "gtest/gtest.h"
 #include <Options.hpp>
