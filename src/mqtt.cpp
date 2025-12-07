@@ -16,6 +16,7 @@ volatile bool endMqttClientThread = false;
 
 // class impl.
 MqttClient::MqttClient(struct json_object *option) : _enabled(false) {
+
 	print(log_finest, "MqttClient::MqttClient called", "mqtt");
 	if (option) {
 		assert(json_object_get_type(option) == json_type_object);
