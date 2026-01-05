@@ -102,30 +102,31 @@ class TransferBuffer {
 	}
 
 	/**
-     * Copy readings from Buffer and mark them deleted
+	 * Copy readings from Buffer and mark them deleted
 	 *
-     * @param src Buffer to copy from. Copied readings are marked deleted, but
-     *     are not erased.
+	 * @param src Buffer to copy from. Copied readings are marked deleted, but
+	 *     are not erased.
 	 * @param Channel name used in debug message
 	 * @param min_ms_between_duplicates Consecutive duplicate values are not sent if
 	 *     their respective time stamps are less than this value apart.
 	 * @return Number of elements copied from buffer
 	 *
 	 */
-    size_type append(Buffer &src, const char *channel, int64_t min_ms_between_duplicates = 0) {
+	size_type append(Buffer &src, const char *channel, int64_t min_ms_between_duplicates = 0) {
 		std::lock_guard<Buffer> lock(src);
 
-        // advance it to first reading not deleted
-        auto it(src.begin()), last(src.end());
-        for (; it != last && it->deleted(); ++it) { /* do nothing */ }
+		// advance it to first reading not deleted
+		auto it(src.begin()), last(src.end());
+		for (; it != last && it->deleted(); ++it) { /* do nothing */
+		}
 
-        if (it == last)
+		if (it == last)
 			return 0;
 
 		iterator old_end(end());
 
 		if (_impl.empty()) {
-            // we do not have any prev. readings -> accept unconditionally
+			// we do not have any prev. readings -> accept unconditionally
 			_impl.push_back(*it);
 			it->mark_delete();
 			++it;

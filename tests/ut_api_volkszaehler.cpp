@@ -133,8 +133,8 @@ TEST(api_Volkszaehler, api_parse_exception) {
 	resp.data = (char *)"{\"exception\": { \"type\":\"UniqueConstraintViolationException\", "
 						"\"message\":\"2 Duplicate entry\"  } }%";
 	resp.size = strlen(resp.data);
-    Volkszaehler_Test::api_parse_exception(v, resp, err, n);
-    ASSERT_STREQ("'UniqueConstraintViolationException': '2 Duplicate entry'", err);
+	Volkszaehler_Test::api_parse_exception(v, resp, err, n);
+	ASSERT_STREQ("'UniqueConstraintViolationException': '2 Duplicate entry'", err);
 	ASSERT_TRUE(0 == Volkszaehler_Test::values(v).size());
 
 	delete[] err;
@@ -169,10 +169,10 @@ TEST(api_Volkszaehler, api_json_tuples_no_duplicates) {
 
 	Reading r2(1.0, timeval{2, 1}, pRid);
 	ch->push(r2);
-    // expect only two data returned in values: r1 ignored as timestamp same as previous and r2
+	// expect only two data returned in values: r1 ignored as timestamp same as previous and r2
 	j = Volkszaehler_Test::api_json_tuples(v, ch->buffer());
 	ASSERT_TRUE(j != 0);
-    ASSERT_EQ(Volkszaehler_Test::values(v).size(), 2);
+	ASSERT_EQ(Volkszaehler_Test::values(v).size(), 2);
 	ASSERT_TRUE(Volkszaehler_Test::values(v).front() == r1);
 	ASSERT_TRUE(Volkszaehler_Test::values(v).back() == r2);
 
@@ -243,9 +243,9 @@ TEST(api_Volkszaehler, api_json_tuples_duplicates) {
 	ASSERT_EQ(Volkszaehler_Test::values(v).front(), r3);
 
 	json_object_put(j);
-    ASSERT_EQ(ch->buffer()->size(), 1);
-    ch->buffer()->clean();
-    ASSERT_EQ(ch->buffer()->size(), 0);
+	ASSERT_EQ(ch->buffer()->size(), 1);
+	ch->buffer()->clean();
+	ASSERT_EQ(ch->buffer()->size(), 0);
 
 	// now try timeout:
 	// add r4 with same value but distance >10s
@@ -263,9 +263,9 @@ TEST(api_Volkszaehler, api_json_tuples_duplicates) {
 	Volkszaehler_Test::values(v).discard(1);
 
 	json_object_put(j);
-    ASSERT_EQ(ch->buffer()->size(), 1);
-    ch->buffer()->clean();
-    ASSERT_EQ(ch->buffer()->size(), 0);
+	ASSERT_EQ(ch->buffer()->size(), 1);
+	ch->buffer()->clean();
+	ASSERT_EQ(ch->buffer()->size(), 0);
 
 	// now try timeout and value change:
 	// expect only new value to be added:
@@ -278,9 +278,9 @@ TEST(api_Volkszaehler, api_json_tuples_duplicates) {
 	ASSERT_EQ(Volkszaehler_Test::values(v).front(), r5);
 	Volkszaehler_Test::values(v).discard(1);
 
-    ASSERT_EQ(ch->buffer()->size(), 1);
-    ch->buffer()->clean();
-    ASSERT_EQ(ch->buffer()->size(), 0);
+	ASSERT_EQ(ch->buffer()->size(), 1);
+	ch->buffer()->clean();
+	ASSERT_EQ(ch->buffer()->size(), 0);
 
 	// now ignore one
 	t1.tv_sec += 1;
@@ -290,10 +290,9 @@ TEST(api_Volkszaehler, api_json_tuples_duplicates) {
 	ASSERT_TRUE(j == 0);
 	ASSERT_TRUE(Volkszaehler_Test::values(v).size() == 0) << Volkszaehler_Test::values(v).size();
 
-    ASSERT_EQ(ch->buffer()->size(), 1);
-    ch->buffer()->clean();
-    ASSERT_EQ(ch->buffer()->size(), 0);
-
+	ASSERT_EQ(ch->buffer()->size(), 1);
+	ch->buffer()->clean();
+	ASSERT_EQ(ch->buffer()->size(), 0);
 
 	// and try timeout and value change again
 	// expect new value to be added:
@@ -308,7 +307,7 @@ TEST(api_Volkszaehler, api_json_tuples_duplicates) {
 	Volkszaehler_Test::values(v).discard(1);
 
 	json_object_put(j);
-    ASSERT_EQ(ch->buffer()->size(), 1);
-    ch->buffer()->clean();
-    ASSERT_EQ(ch->buffer()->size(), 0);
+	ASSERT_EQ(ch->buffer()->size(), 1);
+	ch->buffer()->clean();
+	ASSERT_EQ(ch->buffer()->size(), 0);
 }

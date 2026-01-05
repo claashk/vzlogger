@@ -171,7 +171,7 @@ void vz::api::Volkszaehler::register_device() {}
 json_object *vz::api::Volkszaehler::api_json_tuples(Buffer::Ptr buf) {
 
 	print(log_debug, "==> number of tuples: %d", channel()->name(), buf->size());
-    _buffer.append(*buf, channel()->name(), 1000 * channel()->duplicates());
+	_buffer.append(*buf, channel()->name(), 1000 * channel()->duplicates());
 
 	if (_buffer.empty())
 		return NULL;

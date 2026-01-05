@@ -268,7 +268,7 @@ void vz::api::InfluxDB::send() {
 		print(log_debug, "cleaned buffer, now %i items", channel()->name(), _buffer.size());
 	}
 
-    _buffer.append(*buf, channel()->name(), 1000 * channel()->duplicates());
+	_buffer.append(*buf, channel()->name(), 1000 * channel()->duplicates());
 
 	// build request body from buffer content
 	auto it(_buffer.begin());

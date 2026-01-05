@@ -26,7 +26,7 @@ TEST(TransferBuffer, insert) {
 	};
 
 	copyto(source, data.begin(), data.end());
-    auto n = buf.append(source, "TBufTest");
+	auto n = buf.append(source, "TBufTest");
 	ASSERT_EQ(n, 4);
 	ASSERT_EQ(buf.size(), 4);
 	ASSERT_EQ(buf.begin()->time_ms(), 1000);
@@ -43,7 +43,7 @@ TEST(TransferBuffer, insert) {
 	ASSERT_EQ(n, 4);
 
 	// all elements of source are marked deleted -> copy none
-    n = buf.append(source, "TBufTest");
+	n = buf.append(source, "TBufTest");
 	ASSERT_EQ(n, 0);
 	ASSERT_EQ(buf.size(), 0);
 }
@@ -58,7 +58,7 @@ TEST(TransferBuffer, filter_by_time) {
 							  {2.1, {3, 990}, pRid}, {2.1, {3, 1000}, pRid}};
 
 	copyto(source, data.begin(), data.end());
-    auto n = buf.append(source, "TBufTest");
+	auto n = buf.append(source, "TBufTest");
 	EXPECT_EQ(n, 4);
 	EXPECT_EQ(buf.size(), 4);
 	EXPECT_EQ(buf.begin()->time_ms(), 1000);
@@ -66,7 +66,7 @@ TEST(TransferBuffer, filter_by_time) {
 
 	buf.discard(); // keep last element of history
 	source.undelete();
-    buf.append(source, "TBufTest"); // skips elements with dt <= 0
+	buf.append(source, "TBufTest"); // skips elements with dt <= 0
 	EXPECT_TRUE(buf.empty());
 }
 
@@ -80,13 +80,13 @@ TEST(TransferBuffer, filter_duplicates) {
 							  {2.1, {5, 1000}, pRid}};
 
 	copyto(source, data.begin(), data.end());
-    auto n = buf.append(source, "TBufTest");
+	auto n = buf.append(source, "TBufTest");
 	EXPECT_EQ(n, 7);
 	EXPECT_EQ(buf.size(), 7);
 
 	buf.clear(); // keep last element of history
 	source.undelete();
-    n = buf.append(source, "TBufTest", 3000); // skips duplicates with dt < 3 s
+	n = buf.append(source, "TBufTest", 3000); // skips duplicates with dt < 3 s
 	EXPECT_EQ(n, 4);
 	auto it = buf.begin();
 	ASSERT_EQ(it++->time_ms(), 1000);
