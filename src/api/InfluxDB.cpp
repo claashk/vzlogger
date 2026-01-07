@@ -337,9 +337,12 @@ void vz::api::InfluxDB::send() {
 
 		if (curl_code == CURLE_OK && http_code >= 200 && http_code < 300) { // everything is ok
 			print(log_debug, "InfluxDB CURL success", channel()->name());
-			buf->clean(); // delete the stuff we just sent to InfluxDB from the buffer
-		} else {
-			buf->undelete(); // failure to insert, so dont delete the buffer
+            auto ndel = _buffer.discard(_max_buffer_size);
+            if (_buffer.empty())
+                print(log_finest, "emptied all (%d) values", channel()->name(), ndel);
+            else
+                print(log_finest, "emptied MAX_CHUNK_SIZE (%d) values", channel()->name(), ndel);
+        } else {
 			if (curl_code != CURLE_OK) {
 				print(log_error, "CURL Error: %s", channel()->name(),
 					  curl_easy_strerror(curl_code));
